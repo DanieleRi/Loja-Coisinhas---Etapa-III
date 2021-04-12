@@ -1,0 +1,442 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+
+
+
+typedef struct
+{
+        int  naf,ano_f, lote, dia_compra, pg, online; //ano de fabricação, lote, dia da compra, comprado por boleto ou cartão, comprado em loja fisica ou online.
+        char itens[100],modelo[100],cor[100], fabricante[100]; // itens, modelo, cor, fabricante.
+        float t_lote, valor, valor_u, valor_t;  // total do valor do lote, nota fiscal, valor unitário, valor total
+} lojinha;
+
+typedef struct
+{
+        int  naf, ano_f, lote,online, pg, dia_compra;
+        char itens[100],modelo[100],cor[100], fabricante[100];
+        float t_lote, valor, valor_u, valor_t;
+} troca;
+
+float valor_total( float valoru, float tl1)
+{
+float total;
+      total = valoru * tl1;
+      return total;
+
+}
+
+void abertura()
+{
+  printf("\n\n\n\n========================================================================================================================");
+  printf("\n\n\t\t\t\t                BEM VINDO A LOJA COISINHAS\n\n\t\t\t");
+  printf("\n\t\t\t\t\t              @lojacoisinhas\t\t\t\t");
+  printf("\n\n\n========================================================================================================================\n\n\n\n\n\n\n\n\n\n\n\n");
+}
+
+int main()
+{
+
+
+  float res;
+
+  int  nota=0,l=0,i=0,opc=0,opc2=0;   //variável de alteração de itens, variavel de itens, opção, opção 2.
+
+  setlocale(LC_ALL,"Portuguese");
+
+  lojinha loja[100];
+  troca  lj[100];
+
+  abertura();
+
+  system("color 3F");
+  system("pause");
+  system("cls");
+
+  do{
+
+  system("color F3");
+
+  printf("\n\n\n\n========================================================================================================================");
+  printf("\n\n\t\t\t\t\t\t\t    MENU\t\t");
+  printf("\n\n\t\t\t\t\t\t       Escolha uma opção \t\t\t\t\t\t\t\t\t");
+  printf("\n\t\t\t\t\t\t   (1) SISTEMA DE CADASTRO \t\t\t\t\t\t\t\t\t");
+  printf("\n\t\t\t\t\t\t   (2) CONSULTA            \t\t\t\t\t\t\t\t\t");
+  printf("\n\t\t\t\t\t\t   (3) ALTERAÇÃO DE ELEMENTOS\t\t\t\t\t\t\t\t");
+  printf("\n\t\t\t\t\t\t   (0) SAIR DO SISTEMA\t\t\t\t\t\t\t\t");
+  printf("\n\n========================================================================================================================\n");
+  scanf("%d",&opc);
+
+  system("cls");
+
+  if(opc==1)
+  {
+
+
+      system("color 3F");
+
+      printf("\n========================================================================================================================");
+      printf("\t\t\t\t\t\t   BEM VINDO AO SISTEMA DE CADASTRO   \t\t\t\t\t\t");
+      printf("\n========================================================================================================================\n\n");
+
+      printf("\nDIGITE O NOME DO ITEM: ");
+      fflush(stdin);
+      gets(loja[l].itens);
+
+      printf("\nDIGITE O MODELO DO ITEM: ");
+      fflush(stdin);
+      gets(loja[l].modelo);
+
+      printf("\nDIGITE O FABRICANTE: ");
+      fflush(stdin);
+      gets(loja[l].fabricante);
+
+      printf("\nDIGITE O ANO DE FABRICAÇÃO: ");
+      scanf("%d",&loja[l].ano_f);
+
+      printf("\nDIGITE O LOTE: ");
+      scanf("%d",&loja[l].lote);
+
+      printf("\nDIGITE O DIA DA COMPRA DO LOTE (digite apenas números): ");
+      scanf("%d",&loja[l].dia_compra);
+
+      printf("\nDIGITE A COR: ");
+      fflush(stdin);
+      gets(loja[l].cor);
+
+      printf("\nDIGITE A NOTA FISCAL: ");
+      scanf("%d", &loja[l].naf);
+
+      printf("\nPRODUTO COMPRADO NA LOJA FÍSICA (1) OU ONLINE (2) ?: ");;
+      scanf("%d",&loja[l].online);
+
+      printf("\nFORMA DE PAGAMENTO POR BOLETO (1) OU CARTÃO (2): ");
+      scanf("%d",&loja[l].pg);
+
+      printf("\nDIGITE O VALOR DO LOTE: ");
+      scanf("%f", &loja[l].valor);
+
+      printf("\nDIGITE O VALOR UNITÁRIOO: ");
+      scanf("%f",&loja[l].valor_u);
+
+
+      printf("\nDIGITE O TOTAL DE ITENS NO LOTE: ");
+      scanf("%f", &loja[l].t_lote);
+
+      res = valor_total(loja[l].valor_u,loja[l].t_lote);
+
+      printf("\nVALOR TOTAL DE ITENS POR PREÇO UNITÁRIO: %.2f\n",res);
+
+      l++;
+
+
+
+      printf("\n========================================================================================================================");
+      printf("\t\t\t\t\t\t   PRODUTO CADASTRADO COM SUCESSO  \t\t\t\t\t\t");
+      printf("\n========================================================================================================================\n\n");
+
+      system("pause");
+      system("cls");
+
+}
+
+  else if(opc==2)
+      {
+      system("color 3F");
+
+      printf("\n========================================================================================================================");
+      printf("\t\t\t\t\t\t   BEM VINDO AO SISTEMA DE CONSULTA   \t\t\t\t\t\t");
+      printf("\n========================================================================================================================\n\n");
+
+      printf("ITENS CADASTRADOS: ");
+
+      for(i=0;i<l;i++)
+      {
+
+           printf("\n----------------------------------------------------------ITEM----------------------------------------------------------");
+           printf("\n");
+
+           printf("\nNOME: %s\n",loja[i].itens);
+
+           printf("MODELO: %s\n",loja[i].modelo);
+
+           printf("FABRICANTE: %s\n",loja[i].fabricante);
+
+           printf("ANO DE FABRICACAO: %d\n",loja[i].ano_f);
+
+           printf("LOTE: %d\n",loja[i].lote);
+
+           printf("COR: %s\n",loja[i].cor);
+
+           printf("NOTA FISCAL: %d\n",loja[i].naf);
+
+           printf("DIA DA COMPRA: %d\n",loja[i].dia_compra);
+
+           printf("LOJA FISICA OU ONLINE?: %d\n",loja[i].online);
+
+           printf("FORMA DE PAGAMENTO: %d\n",loja[i].pg);
+
+           printf("VALOR DO LOTE: R$%.2f\n",loja[i].valor);      //alterar o valor do lote implica em alterar também o valor unitário
+
+           printf("VALOR UNITÁRIO: R$%.2f\n",loja[i].valor_u);
+
+           printf("TOTAL DE ITENS: %.2f\n",loja[i].t_lote);
+
+           res = valor_total(loja[i].valor_u,loja[i].t_lote);
+
+           printf("VALOR TOTAL DE ITENS POR PREÇO UNITÁRIO: %.2f\n\n",res);
+           printf("\n");
+
+
+}
+           system("pause");
+           system("cls");
+      }
+
+
+      else if(opc==3)
+      {
+              system("color 3F");
+      printf("\n========================================================================================================================");
+      printf("\t\t\t\t\t\t   BEM VINDO AO SISTEMA DE ALTERAÇÃO   \t\t\t\t\t\t");
+      printf("\n========================================================================================================================\n\n");
+
+              printf("\nINFORME O NUMERO DO PRODUTO: ");
+
+              scanf("%d", &nota);
+              nota = nota-1;
+
+
+              fflush(stdin);
+              system("cls");
+              system("color 3F");
+
+              printf("\n\n========================================================================================================================");
+              printf("\n\n\t\t\t\t\t\t\tMENU DE ALTERAÇÃO \t\t\t\t\t\t\t\n");
+              printf("\t\t\t\t\t     Escolha a opção que deseja alterar \t\t\t\t\t\t\t\t\t\n");
+
+              printf("\t\t\t\t\t\t   (1) NOME DO ITEM\t\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t   (2) MODELO DO ITEM      \t\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t   (3) FABRICANTE\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t\t   (4) ANO DE FABRICACAO\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t   (5) LOTE\t\t\t\t\t");
+
+              printf("\t\t\t\t\t\t\t\t\t           (6) COR DO ITEM\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t\t\t\t   (7) VALOR DO LOTE\t\t\t\t");
+
+              printf("\t\t\t\t\t\t\t\t\t\t   (8) VALOR UNITÁRIO\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t\t\t\t   (9) TOTAL DE ITENS\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t\t\t\t   (10) DIA DA COMPRA DO LOTE\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t   (11)LOJA ONLINE OU FISICA\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t   (12)FORMA DE PAGAMENTO\t\t\t\t\t\t\t\t");
+
+              printf("\t\t\t\t\t   (0) VOLTAR AO MENU INICIAL\t\t\t\t\t\t\t\t");
+
+              printf("\n\n========================================================================================================================");
+
+              scanf("%d",&opc2);
+
+
+      if(opc2==0)
+      {
+              printf("SAINDO DO SISTEMA");
+              system("cls");
+              system("pause");
+      }
+
+
+             system("cls");
+
+            switch(opc2)
+            {
+            case 1:
+
+                printf("\nDIGITE O NOVO NOME DO ITEM: ");
+                scanf("%s",&loja[nota].itens);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO NOME: %s. \n\n ",loja[nota].itens);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 2:
+
+                printf("\nDIGITE O NOVO MODELO DO ITEM: ");
+                scanf("%s",&loja[nota].modelo);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO MODELO: %s. \n\n ",loja[nota].modelo);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 3:
+
+                printf("\nDIGITE O NOVO FABRICANTE DO ITEM: ");
+                scanf("%s",&loja[nota].fabricante);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO FABRICANTE: %s. \n\n ",loja[nota].fabricante);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 4:
+
+                printf("\nDIGITE O NOVO ANO DE FABRICACAO DO ITEM: ");
+                scanf("%d",&loja[nota].ano_f);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO ANO DE FABRICACAO: %d. \n\n ",loja[nota].ano_f);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 5:
+
+                printf("\nDIGITE O NOVO LOTE DO ITEM: ");
+                scanf("%d",&loja[nota].lote);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO LOTE: %d. \n\n ",loja[nota].lote);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 6:
+
+                printf("\nDIGITE A NOVA COR DO ITEM: ");
+                scanf("%s",&loja[nota].cor);
+
+                fflush(stdin);
+
+                printf(" \n\nA NOVA COR: %s. \n\n ",loja[nota].cor);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 7:
+
+                printf("\nDIGITE O NOVO VALOR DO LOTE: ");
+                scanf("%f",&loja[nota].valor);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO VALOR: R$%.2f. \n\n ",loja[nota].valor);
+
+                system("pause");
+                system("cls");
+
+                case 8:
+
+                printf("\nDIGITE O NOVO VALOR UNITÁRIO: ");
+                scanf("%f",&loja[nota].valor_u);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO VALOR: R$%.2f. \n\n ",loja[nota].valor_u);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 9:
+
+                printf("\nDIGITE O NOVO TOTAL DE ITENS: ");
+                scanf("%f",&loja[nota].t_lote);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO TOTAL DE ITENS: %.2f \n\n ",loja[nota].t_lote);
+
+                system("pause");
+                system("cls");
+
+
+                break;
+
+                case 10:
+
+                printf("\nDIGITE O NOVO DIA DA COMPRA (digite apenas números) : ");
+                scanf("%d",&loja[nota].dia_compra);
+
+                fflush(stdin);
+
+                printf(" \n\nO DIA DA COMPRA DO LOTE: %d. \n\n ",loja[nota].dia_compra);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 11:
+
+                printf("\nDIGITE O NOVO TIPO DA COMPRA \nONLINE (1) OU FÍSICA (2): ");
+                scanf("%d",&loja[nota].online);
+
+                fflush(stdin);
+
+                printf(" \n\nO TIPO DE COMPRA DO LOTE: %d. \n\n ",loja[nota].online);
+
+                system("pause");
+                system("cls");
+
+                break;
+
+                case 12:
+
+                printf("\nDIGITE A NOVA FORMA DE PAGAMENTO \nBOLETO (1) OU CARTÃO (2): ");
+                scanf("%d",&loja[nota].pg);
+
+                fflush(stdin);
+
+                printf(" \n\nO NOVO TIPO DE PAGAMENTO: %d. \n\n ",loja[nota].pg);
+
+                system("pause");
+                system("cls");
+
+                break;
+          }
+
+        }
+
+      }
+       while(opc!=0);
+
+       system("color F3");
+
+       printf("\n\n\n\n\n\n================================================================================");
+       printf("\n\n\n\n\t\t\t  OBRIGADO POR USAR O PROGRAMA!\n\n\t\t\t\t");
+       printf("\n\n\n================================================================================\n\n\n\n");
+
+return 0;
+}
